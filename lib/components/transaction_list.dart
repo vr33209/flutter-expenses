@@ -6,7 +6,11 @@ import '../models/transaction.dart';
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
 
-  TransactionList(this.transactions);
+  final void Function(
+    String title,
+  ) removeTransation;
+
+  TransactionList(this.transactions, this.removeTransation);
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +58,18 @@ class TransactionList extends StatelessWidget {
                                   color: Colors.grey,
                                 )),
                           ],
+                        ),
+                        Container(
+                          child: TextButton(
+                            child: Text("X"),
+                            style: TextButton.styleFrom(
+                              primary: Colors.red[700],
+                              alignment: Alignment.topRight,
+                            ),
+                            onPressed: () {
+                              removeTransation(transaction.id);
+                            },
+                          ),
                         )
                       ],
                     )))
